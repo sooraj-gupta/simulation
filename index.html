@@ -1,0 +1,20 @@
+<html>
+    <head>
+        <script src = "javascript.js"></script>
+        <link rel = "stylesheet" href = "style.css">
+    </head>
+    <body onload="setup();">
+        <canvas id = "canvas" onmousedown="coor(event)"></canvas>
+		<center>
+			<a id = "vx">Velocity X:</a><a> ; </a>
+			<a id = "vy">Velocity Y:</a><br>
+			<br>
+			<button class = "button" onclick = "decrease();">-</button><a id = mass> Mass: 1 </a><button class = "button" onclick = "increase();">+</button><br>
+			<br>
+			<button onclick = "deF();">-</button><a id = "f"> Friction: 10% </a><button onclick = "inF();" >+</button><br><br>
+			<button onclick = "deJ();">-</button><a id = "j"> Jumping Force: 60N </a><button onclick = "inJ();" >+</button><br><br>
+			<button style = "position: absolute; width: 100vw; height: 80px; left: 0; right: 0; bottom: 0;" onclick = "jump();">Jump</button>
+		</center>
+    </body>
+
+</html>
