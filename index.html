@@ -1,5 +1,6 @@
 <html>
     <head>
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
         <script src = "javascript.js"></script>
         <link rel = "stylesheet" href = "style.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,14 +8,15 @@
     <body onload="setup();">
         <canvas id = "canvas" onmousedown="coor(event)"></canvas>
 		<center>
+			<br>
 			<a id = "vx">Velocity X:</a><a> ; </a>
-			<a id = "vy">Velocity Y:</a><br>
+			<a id = "vy">Velocity Y:</a>
+			<p style = "margin: 0; padding: 10px;"> </p>
+			<a class = "dec a" onclick = "decrease();">-</a><a class = "bg" id = mass> Mass: 1 </a><a class = "inc a" onclick = "increase();">+</a><br>
 			<br>
-			<button class = "button" onclick = "decrease();">-</button><a id = mass> Mass: 1 </a><button class = "button" onclick = "increase();">+</button><br>
-			<br>
-			<button onclick = "deF();">-</button><a id = "f"> Friction: 10% </a><button onclick = "inF();" >+</button><br><br>
-			<button onclick = "deJ();">-</button><a id = "j"> Jumping Force: 60N </a><button onclick = "inJ();" >+</button><br><br>
-			<button style = "position: absolute; width: 100vw; height: 80px; left: 0; right: 0; bottom: 0;" onclick = "jump();">Jump</button>
+			<a class = "dec" onclick = "deF();">-</a><a class = "bg" id = "f"> Friction: 10% </a><a class = "inc" onclick = "inF();" >+</a><br><br>
+			<a class = "dec" onclick = "deJ();">-</a><a class = "bg" id = "j"> Jumping Force: 60N </a><a class = "inc" onclick = "inJ();" >+</a><br><br>
+			<button style = "position: absolute; width: 100vw; height: 80px; left: 0; right: 0; bottom: 0;" class = "button" onclick = "jump();">Jump</button>
 		</center>
     </body>
 

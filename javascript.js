@@ -168,7 +168,7 @@ function draw()
     c.fillRect( x, y, 50, 50 );
 	
 	fill( 0,100,0 );
-    c.fillRect( 0, 460, screen.width, 10)
+    c.fillRect( 0, 460, screen.width, 20)
     
     
     checkGround();
