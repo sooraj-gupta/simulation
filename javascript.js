@@ -39,24 +39,43 @@ function deJ(){
 
 function jump()
 {
-	if( y > 400 )
+	if( y > bottom - 20 )
 	{
 		instantForceY = jumpingForce;
     	forcesY = 0;
 	}
 }
 
+var bottom = 350;
+
 function setup() {
     var canvas = document.getElementById("canvas");
-    canvas.height = 480;
+    canvas.height = bottom + 70;
     canvas.width = window.innerWidth;
     window.addEventListener( "keydown", keyDown, false);
 	canvas.addEventListener( "mousedown", handleMouseDown );
 	canvas.addEventListener( "mouseup", handleMouseUp );
 	canvas.addEventListener( "mousemove", handleMouseMove );
-	canvas.addEventListener( "touchstart", handleMouseDown );
-	canvas.addEventListener( "touchend", handleMouseUp );
-	canvas.addEventListener( "touchmove", handleMouseMove );
+	//canvas.addEventListener( "touchstart", handleMouseDown );
+	//canvas.addEventListener( "touchend", handleMouseUp );
+	//canvas.addEventListener( "touchmove", handleMouseMove );
+	document.addEventListener('touchmove', function(e) {
+    	e.preventDefault();
+    	var touch = e.touches[0];
+    	mouseX = touch.pageX;
+		instantForceX = (mouseX - x)/100;
+	}, false);
+	
+	canvas.addEventListener('wheel', function(e) {
+
+        e.preventDefault();
+
+}, false);
+  canvas.addEventListener('touchmove', function(e) {
+
+        e.preventDefault();
+
+}, false);
     
     c = canvas.getContext("2d");
     window.setInterval( draw, 50 );
@@ -76,14 +95,13 @@ function handleMouseMove( event )
 {
 	if( down )
 	{
-		coor( event );
-		instantForceX = (mouseX - x)/100; 
+	
 	}
 }
 function handleMouseDown( event )
 {
 	coor( event );
-	instantForceX = (mouseX - x)/100; 
+		instantForceX = (mouseX - x)/100;  
 	down = true;
 }
 function handleMouseUp( event )
@@ -104,7 +122,7 @@ function coor( event )
 }
 
 var x = 200;
-var y = 410;
+var y = bottom;
 
 var gravity = 9.8;
 var ySpeed = 0;
@@ -138,7 +156,7 @@ var jumpingForce = -60;
 
 function keyDown( e ){
     
-    if( e.keyCode == 32 && y > 400 ){   
+    if( e.keyCode == 32 && y > bottom - 10 ){   
         jump();
     }
 	if( e.keyCode == 39 ){   
@@ -168,7 +186,7 @@ function draw()
     c.fillRect( x, y, 50, 50 );
 	
 	fill( 0,100,0 );
-    c.fillRect( 0, 460, screen.width, 20)
+    c.fillRect( 0, bottom + 50, screen.width, 20)
     
     
     checkGround();
@@ -211,6 +229,8 @@ function draw()
 	
 	document.getElementById("vx").innerHTML = "Velocity X: " + parseInt( xSpeed, 10 );
 	document.getElementById("vy").innerHTML = "Velocity Y: " + -parseInt( ySpeed, 10 );
+	
+	//document.getElementById("x").innerHTML = mouseX;
     
 }
 
@@ -222,15 +242,15 @@ function addConstantForce( f ){
 }
 
 function reGround(){
-    y = 410;
+    y = bottom ;
 }
 
 function checkGround( )
 {
-    if( y >= 409 && instantForceY == 0 ){
+    if( y >= bottom - 11 && instantForceY == 0 ){
         forcesY = -( weight );
         ySpeed = 0;
-        if( Math.abs(y) >= 410 )
+        if( Math.abs(y) >= bottom - 10 )
             reGround();
 		var staticFrictionX = weight * frictionXStatic;
 		var kineticFrictionX = weight * frictionXKinetic;
