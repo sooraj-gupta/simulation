@@ -4,6 +4,7 @@ body, html{
 	font-family: 'Roboto';
 	font-size: 16px;
 	font-weight: 200;
+	transition: 0.1s;
 }
 canvas{
 	height: calc( 50vh - 50px);
@@ -16,9 +17,12 @@ canvas{
 	border:none;
 	color: white;
 	font-size: 20px;
+	transition: 0.1s;
 }
 .button:hover{
 	background-color: #222;
+	cursor: pointer;
+	transition: 0.1s;
 }
 .inc
 {
@@ -27,6 +31,7 @@ canvas{
 	padding: 8px 15px;
 	border-top-right-radius: 30px;
 	border-bottom-right-radius: 30px;
+	transition: 0.1s;
 }
 .dec
 {
@@ -35,11 +40,36 @@ canvas{
 	padding: 8px 15px;
 	border-top-left-radius: 30px;
 	border-bottom-left-radius: 30px;
+	transition: 0.1s;
 }
 .bg
 {
-	background-color: black;
+	background-color: #002A00;
 	color: white;
 	padding: 8px;
 	margin: 1px;
+	transition: 0.1s;
+}
+
+.inc:hover, .dec:hover, .but:hover
+{
+	background-color: #333;
+	cursor: pointer;
+	transition: 0.1s;
+}
+
+.but{
+	margin-top: 10px;
+	background-color: black;
+	padding: 8px 10px;
+	color: white;
+	margin-right: 1px;
+	transition: 0.1s;
+}
+
+@media (max-width: 1000px)
+{
+	.desk{
+		display:none;
+	}
 }

@@ -4,7 +4,7 @@ var loaded = false;
 function increase(){
     mass++;
     weight = gravity * mass;
-    document.getElementById("mass").innerHTML = ` Mass: ${mass} `;
+    document.getElementById("mass").innerHTML = ` Mass: ${mass} kg `;
 }
 function decrease(){
     if( mass > 1 )
@@ -12,7 +12,7 @@ function decrease(){
         mass--;
         weight = gravity * mass;
     }
-    document.getElementById("mass").innerHTML = ` Mass: ${mass} `;
+    document.getElementById("mass").innerHTML = ` Mass: ${mass} kg `;
 }
 
 function inF(){
@@ -27,14 +27,25 @@ function deF(){
 }
 
 function inJ(){
-	if( jumpingForce < 500 )
-    	jumpingForce -= 1;
+	if( Math.abs(jumpingForce) < 500 )
+    	jumpingForce -= 2;
     document.getElementById("j").innerHTML = ` Jumping Force: ${-jumpingForce}N `;
 }
 function deJ(){
 	if( Math.abs(jumpingForce) > 5 )
-    	jumpingForce += 1;
+    	jumpingForce += 2;
     document.getElementById("j").innerHTML = ` Jumping Force: ${-jumpingForce}N `;
+}
+
+function inG(){
+	if( gravity < 20 )
+    	gravity += 0.2;
+    document.getElementById("g").innerHTML = ` Gravity: ${Math.floor(gravity*10)/10} m/s<sup style = "font-size:10px;">2</sup> `;
+}
+function deG(){
+	if( gravity > 0.04 )
+    	gravity -= 0.2;
+    document.getElementById("g").innerHTML = ` Gravity: ${Math.floor(gravity*10)/10} m/s<sup style = "font-size:10px;">2</sup> `;
 }
 
 function jump()
@@ -193,10 +204,12 @@ function fill( r, g, b ){
 var timeout;
 function draw()
 {
+	weight = mass * gravity
     time++;
     background( 255, 255, 255 );
     
     checkGround();
+    x += xSpeed;
 	
 	if( down )
 	{
@@ -247,22 +260,18 @@ function draw()
     
     var lastSpeedX = xSpeed;
     
-    ySpeed += aY; 
-    xSpeed += aX;
-	xSpeed *= ( 1 - frictionXKinetic );
-	xSpeed -= ( frictionXKinetic * xSpeed );
+    frictionXKinetic = ((Math.sqrt(mass/(gravity*gravity)))) * (frictionMag*20) * (gravity/20)*(gravity/20) ;
 	
-	frictionXKinetic = (mass - mass*(1-frictionMag))/mass ;
+	ySpeed += aY; 
+    xSpeed += aX;
+	y += ySpeed;
+	
 	
     if( Math.abs(lastSpeedX)/lastSpeedX != Math.abs(xSpeed)/xSpeed  || xSpeed == 0 )
     {
         changedDirection = true;
     }
     
-    
-    
-    y += ySpeed;
-    x += xSpeed;
     
     
     if( instantForceY > 0 || instantForceY < 0 )
@@ -294,13 +303,15 @@ function reGround(){
 
 function checkGround( )
 {
-    if( y >= bottom - 11 && instantForceY == 0 ){
+    if( y >= bottom - 1 && instantForceY == 0 ){
         forcesY = -( weight );
         ySpeed = 0;
         if( Math.abs(y) >= bottom - 10 )
             reGround();
 		var staticFrictionX = weight * frictionXStatic;
 		var kineticFrictionX = weight * frictionXKinetic;
+		xSpeed *= ( 1 - frictionXKinetic/2 );
+		xSpeed -= ( frictionXKinetic * xSpeed );
 		
 		
     }
