@@ -3,9 +3,10 @@ body, html{
     margin:0;
 	font-family: 'Roboto';
 	font-size: 16px;
-	font-weight: 300;
+	font-weight: 200;
 }
 canvas{
+	height: calc( 50vh - 50px)
 }
 
 .button{

@@ -46,7 +46,7 @@ function jump()
 	}
 }
 
-var bottom = window.innerHeight/2 - 100;x
+var bottom = 220;
 function setup() {
     var canvas = document.getElementById("canvas");
     canvas.height = (bottom) + 70;
