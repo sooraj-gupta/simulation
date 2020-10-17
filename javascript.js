@@ -46,11 +46,10 @@ function jump()
 	}
 }
 
-var bottom = 300;
-
+var bottom = window.innerHeight/2 - 100;x
 function setup() {
     var canvas = document.getElementById("canvas");
-    canvas.height = window.innerHeight/2 + 70;
+    canvas.height = (bottom) + 70;
     canvas.width = window.innerWidth;
     window.addEventListener( "keydown", keyDown, false);
 	canvas.addEventListener( "mousedown", handleMouseDown );
@@ -90,22 +89,35 @@ function setup() {
 
 
 var mouseX = 200;
+var lastX = mouseX;
 var down = false;
+var pressed = false;
 function handleMouseMove( event )
 {
-	if( down )
+	if( pressed )
 	{
-	
+		down = true;
+		coor( event );
+		instantForceX = (mouseX - x)/100;  
+		clearTimeout( timeout );
 	}
 }
 function handleMouseDown( event )
 {
 	coor( event );
-		instantForceX = (mouseX - x)/100;  
-	down = true;
+	instantForceX = (mouseX - x)/100;  
+	fill( 0,0 ,0);
+		c.lineWidth = 5;
+		c.beginPath();
+		c.moveTo( x, y + 25 );
+		c.lineTo( mouseX, y+25 );		
+		c.stroke();
+	pressed = true;
+	lastX = mouseX;
 }
 function handleMouseUp( event )
 {
+	pressed = false;
 	down = false;
 }
 
@@ -177,19 +189,54 @@ function background( r, g, b )
 function fill( r, g, b ){
     c.fillStyle = `rgb( ${r}, ${g}, ${b} )`;
 }
+
+var timeout;
 function draw()
 {
     time++;
     background( 255, 255, 255 );
     
-    fill( 0, 0, 0 );
+    checkGround();
+	
+	if( down )
+	{
+		fill( 0,0 ,0);
+		c.lineWidth = 5;
+		c.beginPath();
+		c.moveTo( x, y + 25 );
+		c.lineTo( mouseX, y+25 );
+		c.stroke();
+		if( mouseX > x+25 )
+		{
+			c.beginPath();
+    		c.moveTo(mouseX+10, y+25);
+    		c.lineTo(mouseX - 20, y+15);
+    		c.lineTo(mouseX - 20, y+35);
+    		c.fill();
+		}
+		else if( mouseX < x+25 )
+		{
+			c.beginPath();
+    		c.moveTo(mouseX-10, y+25);
+    		c.lineTo(mouseX + 20, y+15);
+    		c.lineTo(mouseX + 20, y+35);
+    		c.fill();
+		}
+		
+	}
+	
+	fill( 255, 255, 255 );
+    c.fillRect( x-5, y, 60, 50 );
+	
+	fill( 0, 0, 0 );
     c.fillRect( x, y, 50, 50 );
+	
 	
 	fill( 0,100,0 );
     c.fillRect( 0, bottom + 50, screen.width, 20)
     
+	timeout = setTimeout( function(){ down = false; }, 10 );
     
-    checkGround();
     
 	
     aY = ( weight + forcesY + instantForceY )/mass;
