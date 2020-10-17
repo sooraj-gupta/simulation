@@ -46,7 +46,7 @@ function jump()
 	}
 }
 
-var bottom = 350;
+var bottom = 300;
 
 function setup() {
     var canvas = document.getElementById("canvas");
