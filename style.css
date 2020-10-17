@@ -6,7 +6,8 @@ body, html{
 	font-weight: 200;
 }
 canvas{
-	height: calc( 50vh - 50px)
+	height: calc( 50vh - 50px);
+	width: 100vw;
 }
 
 .button{
