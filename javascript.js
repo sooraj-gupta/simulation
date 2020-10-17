@@ -26,7 +26,7 @@ function deF(){
     document.getElementById("f").innerHTML = ` Friction: ${Math.floor(frictionMag*100)}% `;
 }
 
-function inJ(){
+function inJ(){ 
 	if( Math.abs(jumpingForce) < 500 )
     	jumpingForce -= 2;
     document.getElementById("j").innerHTML = ` Jumping Force: ${-jumpingForce}N `;
