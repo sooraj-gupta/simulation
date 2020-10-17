@@ -50,7 +50,7 @@ var bottom = 300;
 
 function setup() {
     var canvas = document.getElementById("canvas");
-    canvas.height = bottom + 70;
+    canvas.height = window.innerHeight/2 + 70;
     canvas.width = window.innerWidth;
     window.addEventListener( "keydown", keyDown, false);
 	canvas.addEventListener( "mousedown", handleMouseDown );
