@@ -4,7 +4,7 @@ var loaded = false;
 function increase(){
     mass++;
     weight = gravity * mass;
-    document.getElementById("mass").innerHTML = ` Mass: ${mass} kg `;
+    update();
 }
 function decrease(){
     if( mass > 1 )
@@ -12,40 +12,40 @@ function decrease(){
         mass--;
         weight = gravity * mass;
     }
-    document.getElementById("mass").innerHTML = ` Mass: ${mass} kg `;
+    update();
 }
 
 function inF(){
 	if( frictionMag < 1 )
     	frictionMag += 0.01;
-    document.getElementById("f").innerHTML = ` Friction: ${parseInt(frictionMag*100, 10)}% `;
+    update();
 }
 function deF(){
 	if( frictionMag > 0.01 )
     	frictionMag -= 0.01;
-    document.getElementById("f").innerHTML = ` Friction: ${Math.floor(frictionMag*100)}% `;
+    update();
 }
 
 function inJ(){ 
-	if( Math.abs(jumpingForce) < 500 )
+	if( Math.abs(jumpingForce) < 1000 )
     	jumpingForce -= 2;
-    document.getElementById("j").innerHTML = ` Jumping Force: ${-jumpingForce}N `;
+    update();
 }
 function deJ(){
 	if( Math.abs(jumpingForce) > 5 )
     	jumpingForce += 2;
-    document.getElementById("j").innerHTML = ` Jumping Force: ${-jumpingForce}N `;
+    update();
 }
 
 function inG(){
 	if( gravity < 20 )
     	gravity += 0.2;
-    document.getElementById("g").innerHTML = ` Gravity: ${Math.floor(gravity*10)/10} m/s<sup style = "font-size:10px;">2</sup> `;
+    update();
 }
 function deG(){
 	if( gravity > 0.04 )
     	gravity -= 0.2;
-    document.getElementById("g").innerHTML = ` Gravity: ${Math.floor(gravity*10)/10} m/s<sup style = "font-size:10px;">2</sup> `;
+    update();
 }
 
 function jump()
@@ -95,8 +95,41 @@ function setup() {
         this.blur();
     })
 })
+	getUrl();
+	setUrl();
 }
 
+
+function setUrl()
+{
+	 window.history.replaceState(null, null, `?mass=${mass}&friction=${parseInt(frictionMag*100)/100}&jump=${jumpingForce}&gravity=${parseInt(gravity*10)/10}`);
+}
+
+function update()
+{
+	document.getElementById("mass").innerHTML = ` Mass: ${mass} kg `;
+	document.getElementById("f").innerHTML = ` Friction: ${Math.floor(frictionMag*100)}% `;
+	document.getElementById("j").innerHTML = ` Jumping Force: ${-jumpingForce}N `;
+	document.getElementById("g").innerHTML = ` Gravity: ${Math.floor(gravity*10)/10} m/s<sup style = "font-size:10px;">2</sup> `; 
+	setUrl();
+}
+
+function getUrl()
+{
+	const query = window.location.search;
+    const urlParams = new URLSearchParams(query);
+	mass = parseInt( urlParams.get('mass') );
+	frictionMag = parseFloat( urlParams.get('friction') );
+	jumpingForce = parseInt( urlParams.get('jump') );
+	gravity = parseFloat( urlParams.get('gravity') );
+	
+	if( gravity > 20 )
+	{
+		gravity = 20;		
+	}
+	
+	update();
+}
 
 
 var mouseX = 200;
@@ -154,7 +187,7 @@ var aY = 0;
 var xSpeed = 0;
 var aX = 0;
 
-var mass = 1;
+var mass = 60;
 
 var weight = gravity * mass;
 var forcesY = 0;
@@ -175,7 +208,7 @@ var frictionX = 0;
 
 var frictionMag = 0.1;
 
-var jumpingForce = -60;
+var jumpingForce = -2000;
 
 function keyDown( e ){
     
