@@ -5,6 +5,7 @@ body, html{
 	font-size: 16px;
 	font-weight: 200;
 	transition: 0.1s;
+	background-color: white;
 }
 canvas{
 	height: calc( 50vh - 50px);
