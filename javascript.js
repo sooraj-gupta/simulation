@@ -57,7 +57,7 @@ function jump()
 	}
 }
 
-var bottom = 220;
+var bottom = window.innerHeight/2.2;
 function setup() {
     var canvas = document.getElementById("canvas");
     canvas.height = (bottom) + 70;
@@ -118,10 +118,10 @@ function getUrl()
 {
 	const query = window.location.search;
     const urlParams = new URLSearchParams(query);
-	mass = parseInt( urlParams.get('mass') );
-	frictionMag = parseFloat( urlParams.get('friction') );
-	jumpingForce = parseInt( urlParams.get('jump') );
-	gravity = parseFloat( urlParams.get('gravity') );
+	mass = ( urlParams.get('mass' ) ) ? parseInt( urlParams.get('mass' ) ) : mass  ;
+	frictionMag = ( urlParams.get( 'friction' ) ) ? parseFloat( urlParams.get('friction') ) : frictionMag ;
+	jumpingForce = ( urlParams.get('jump' ) ) ? parseInt( urlParams.get('jump') ) : jumpingForce  ;
+	gravity = ( urlParams.get( 'gravity' ) ) ? parseFloat( urlParams.get('gravity') ) : gravity ;
 	
 	if( gravity > 20 )
 	{
@@ -228,7 +228,7 @@ function keyDown( e ){
 function background( r, g, b )
 {
     fill( r, g, b);
-    c.fillRect( 0, 0, window.innerWidth, screen.height );
+    c.fillRect( 0, 0, window.innerWidth, window.innerHeight );
 }
 function fill( r, g, b ){
     c.fillStyle = `rgb( ${r}, ${g}, ${b} )`;
@@ -279,7 +279,7 @@ function draw()
 	
 	
 	fill( 0,100,0 );
-    c.fillRect( 0, bottom + 50, screen.width, 20)
+    c.fillRect( 0, bottom + 50, window.innerWidth, 20)
     
 	timeout = setTimeout( function(){ down = false; }, 10 );
     
