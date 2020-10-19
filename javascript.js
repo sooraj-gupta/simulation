@@ -187,12 +187,12 @@ var aY = 0;
 var xSpeed = 0;
 var aX = 0;
 
-var mass = 60;
+var mass = 1;
 
 var weight = gravity * mass;
 var forcesY = 0;
 
-var forcesX = 0.0001;
+var forcesX = 0;;
 
 var time = 0;
 
@@ -208,7 +208,7 @@ var frictionX = 0;
 
 var frictionMag = 0.1;
 
-var jumpingForce = -2000;
+var jumpingForce = -60;
 
 function keyDown( e ){
     
