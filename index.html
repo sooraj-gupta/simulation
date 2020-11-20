@@ -2,7 +2,6 @@
     <head>
 		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 		<title>Simulation</title>
-        <script src = "javascript.js"></script>
         <link rel = "stylesheet" href = "style.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta property="og:image" content="box.gif" />
@@ -26,6 +25,10 @@
 			<a class = "but desk" onclick = "gravity = 1.4; inG();">Moon</a><a class = "but desk" onclick = "gravity = 9.7; inG();">Earth</a><a class = "desk but" onclick = "gravity = 3.4; inG();">Mars</a><a class = "inc" onclick = " inG();" >+</a>
 			<button style = "position: absolute; width: 100vw; height: 80px; left: 0; right: 0; bottom: 0;" class = "button" onclick = "jump();">Jump</button>
 		</center>
+		
+		<script src = "javascript.js"></script>
+		<script src = "buttonListeners.js"></script>
+		
     </body>
 
 </html>
