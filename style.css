@@ -6,6 +6,11 @@ body, html{
 	font-weight: 200;
 	transition: 0.1s;
 	background-color: white;
+	user-select: none;
+}
+*
+{
+	user-select: none;
 }
 canvas{
 	height: calc( 50vh - 50px);
